@@ -1,0 +1,127 @@
+{
+  "expo": {
+    "name": "Sida",
+    "slug": "sida",
+    "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/7e089b8d-3250-43f1-9367-37be599422ae"
+    },
+    "orientation": "default",
+    "icon": "./assets/images/icon.png",
+    "scheme": "sida",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.michael.hunter22620.sida",
+      "infoPlist": {
+        "UIBackgroundModes": ["remote-notification"],
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Sida uses the camera to photograph damage, rooms, and elevations on a claim.",
+        "NSPhotoLibraryUsageDescription": "Sida uses your photo library when you attach an existing photo to a claim."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+      ]
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "PORTRAIT"
+        }
+      ],
+      [
+        "expo-apple-authentication"
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#208AEF",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 76
+        }
+      ],
+      "expo-maps",
+      "expo-localization",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Sida uses the microphone when you record a voice note with a claim photo.",
+          "enableBackgroundPlayback": false,
+          "enableBackgroundRecording": false 
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#e87722",
+          "defaultChannel": "default"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "17.0",
+            "extraPods": [
+              {
+                "name": "AppCheckCore",
+                "version": "11.2.0"
+              }
+            ]
+          }
+        }
+      ],
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.218206643529-qtdneip9k3ddo6ec24n9fu95oi10s8hk"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Sida uses your photo library when you attach an existing photo to a claim.",
+          "cameraPermission": "Sida uses the camera to photograph damage, rooms, and elevations on a claim."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Sida uses the camera to photograph damage, rooms, and elevations on a claim.",
+          "microphonePermission": "Sida uses the microphone when you record a voice note with a claim photo.",
+          "recordAudioAndroid": true,
+          "barcodeScannerEnabled": false
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7e089b8d-3250-43f1-9367-37be599422ae"
+      }
+    }
+  }
+}

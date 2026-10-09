@@ -1,0 +1,55 @@
+diff --git a/node_modules/expo-lidar/expo-module.config.json b/node_modules/expo-lidar/expo-module.config.json
+index 1bfc535..2b5b0bb 100644
+--- a/node_modules/expo-lidar/expo-module.config.json
++++ b/node_modules/expo-lidar/expo-module.config.json
+@@ -1,6 +1,7 @@
+ {
+   "platforms": ["ios"],
+   "ios": {
+-    "modules": ["LiDARSessionModule", "LiDARCameraViewModule"]
++    "modules": ["LiDARSessionModule", "LiDARCameraViewModule"],
++    "podspecPath": "ExpoLidar.podspec"
+   }
+ }
+diff --git a/node_modules/expo-lidar/ios/LiDARSessionModule.swift b/node_modules/expo-lidar/ios/LiDARSessionModule.swift
+index 61fb6bf..df71809 100644
+--- a/node_modules/expo-lidar/ios/LiDARSessionModule.swift
++++ b/node_modules/expo-lidar/ios/LiDARSessionModule.swift
+@@ -19,7 +19,7 @@ public class LiDARSessionModule: Module {
+                 return ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth)
+             }
+             return false
+-        }
++        }.runOnQueue(.main)
+ 
+         // MARK: - Session Lifecycle
+ 
+@@ -43,13 +43,13 @@ public class LiDARSessionModule: Module {
+             self.sessionDelegate = delegate
+ 
+             session.run(config, options: [.resetTracking, .removeExistingAnchors])
+-        }
++        }.runOnQueue(.main)
+ 
+         AsyncFunction("stopSession") { () in
+             self.arSession?.pause()
+             self.arSession = nil
+             self.sessionDelegate = nil
+-        }
++        }.runOnQueue(.main)
+ 
+         // MARK: - Depth Frame Capture
+ 
+diff --git a/node_modules/expo-lidar/ios/MeshExporter.swift b/node_modules/expo-lidar/ios/MeshExporter.swift
+index c533385..5168705 100644
+--- a/node_modules/expo-lidar/ios/MeshExporter.swift
++++ b/node_modules/expo-lidar/ios/MeshExporter.swift
+@@ -69,7 +69,7 @@ class MeshExporter {
+             }
+ 
+             let faceIndicesPerFace = faces.indexCountPerPrimitive
+-            let indexBuffer = faces.buffer.contents().advanced(by: faces.offset)
++            let indexBuffer = faces.buffer.contents()
+ 
+             for f in 0..<faces.count {
+                 var faceIndices: [Int] = []
